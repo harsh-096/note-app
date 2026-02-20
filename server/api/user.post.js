@@ -1,5 +1,17 @@
-import bcrypt from 'bcryptjs'
-import { getPrismaClient } from '../utils/prisma'
+// import bcrypt from 'bcryptjs'
+// import { getPrismaClient } from '../utils/prisma'
+
+import pkg from '@prisma/client';
+const { PrismaClient } = pkg;
+
+let prisma;
+
+export const getPrismaClient = () => {
+  if (!prisma) {
+    prisma = new PrismaClient();
+  }
+  return prisma;
+};
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
