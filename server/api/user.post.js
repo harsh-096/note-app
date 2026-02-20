@@ -77,6 +77,4 @@ if (password.length<=6) {
       message: "Something went wrong during registration."
     })
   }
-
-
 })
