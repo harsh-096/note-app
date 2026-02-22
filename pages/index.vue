@@ -169,7 +169,7 @@ onMounted(() => {
     <div class="relative z-10 flex-1 overflow-hidden p-4 md:p-6 flex flex-col">
   <div class="flex-1 w-full rounded-3xl border border-white/10 bg-zinc-950/40 shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl overflow-hidden flex flex-col">
     
-    <Splitpanes class="flex-1 w-full custom-splitpanes">
+    <Splitpanes class="flex-1 h-full w-full custom-splitpanes">
           
           <Pane min-size="15" size="20" max-size="30" class="border-r border-white/10">
             <Sidebar 
@@ -200,15 +200,69 @@ onMounted(() => {
 
 <style>
 /* KEEP YOUR SPLITPANES AND SCROLLBAR CSS EXACTLY AS IT WAS HERE */
-.splitpanes { background-color: transparent !important; }
-.splitpanes__pane { background-color: transparent !important; }
-.custom-splitpanes .splitpanes__splitter { background-color: rgba(255, 255, 255, 0.02) !important; border-left: 1px solid rgba(255, 255, 255, 0.05); border-right: 1px solid rgba(255, 255, 255, 0.05); width: 4px !important; transition: all 0.3s ease; position: relative; z-index: 10; }
-.custom-splitpanes .splitpanes__splitter:hover, .custom-splitpanes .splitpanes__splitter:active { background-color: rgba(168, 85, 247, 0.5) !important; box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); width: 6px !important; }
-.custom-splitpanes .splitpanes__splitter::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: 30px; width: 2px; background-color: rgba(255, 255, 255, 0.1); border-radius: 4px; transition: background-color 0.3s; }
-.custom-splitpanes .splitpanes__splitter:hover::before { background-color: rgba(255, 255, 255, 0.8); }
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; transition: background-color 0.3s; }
-::-webkit-scrollbar-thumb:hover { background-color: rgba(168, 85, 247, 0.5); }
-* { scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.1) transparent; }
+.splitpanes{ 
+  background-color: transparent !important; 
+}
+.splitpanes.custom-splitpanes {
+  height: 100% !important;
+  display: flex !important;
+}
+/* Ensure panes don't collapse or expand weirdly */
+.custom-splitpanes .splitpanes__pane {
+  background-color: transparent !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+.splitpanes__pane { 
+  background-color: transparent !important; 
+}
+.custom-splitpanes .splitpanes__splitter { 
+  background-color: rgba(255, 255, 255, 0.02) !important; 
+  border-left: 1px solid rgba(255, 255, 255, 0.05); 
+  border-right: 1px solid rgba(255, 255, 255, 0.05); 
+  width: 4px !important; 
+  transition: all 0.3s ease; 
+  position: relative; 
+  z-index: 10; 
+}
+.custom-splitpanes .splitpanes__splitter:hover, .custom-splitpanes .splitpanes__splitter:active { 
+  background-color: rgba(168, 85, 247, 0.5) !important; 
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); 
+  width: 6px !important; 
+}
+.custom-splitpanes .splitpanes__splitter::before { 
+  content: ''; 
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  height: 30px; 
+  width: 2px; 
+  background-color: rgba(255, 255, 255, 0.1); 
+  border-radius: 4px; 
+  transition: background-color 0.3s; 
+}
+.custom-splitpanes .splitpanes__splitter:hover::before { 
+  background-color: rgba(255, 255, 255, 0.8); 
+}
+::-webkit-scrollbar { 
+  width: 8px; 
+  height: 8px; 
+}
+::-webkit-scrollbar-track { 
+  background: transparent; 
+}
+::-webkit-scrollbar-thumb { 
+  background-color: rgba(255, 255, 255, 0.1); 
+  border-radius: 10px; 
+  transition: background-color 0.3s; 
+}
+::-webkit-scrollbar-thumb:hover { 
+  background-color: rgba(168, 85, 247, 0.5); 
+}
+* { 
+  scrollbar-width: thin; 
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent; 
+  }
 </style>
