@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 body {
+	height: 100%;
+    margin: 0;
 	font-family: "Space Grotesk", "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
 	background-color: #07090d;
 	background-image:
