@@ -1,7 +1,9 @@
 import bcrypt from 'bcryptjs'
 import { getPrismaClient } from '../utils/prisma'
+import jwt from 'jsonwebtoken';
 
-// import pkg from '@prisma/client';
+
+//import pkg from '@prisma/client';
 // const { PrismaClient } = pkg;
 
 // let prisma;
@@ -61,6 +63,21 @@ if (password.length<=6) {
         salt: salt,
       },
     })
+
+    // jwt token code 
+    var token = jwt.sign({ id: user.id }, process.env.JWT_KEY);
+
+    console.log("Token:", token)
+
+    // Set the cookie securely here too!
+    setCookie(event, 'NoteApp', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 60 * 60 * 24 * 7,
+      path: '/'
+    })
+    // console.log(token)
 
     return {
       success: true,

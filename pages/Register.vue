@@ -1,3 +1,54 @@
+<script setup>
+  import Swal from 'sweetalert2'
+
+  definePageMeta({
+    middleware: ['guest'],
+  })
+  
+  const email = ref('')
+  const password = ref('')
+
+  const error = ref('')
+  const loading = ref(false)
+
+  async function submit(){
+    error.value = ''
+    loading.value = true
+
+    try {
+      const response = await $fetch('/api/user', {
+        method: "POST",
+        body: {
+          email: email.value,
+          password: password.value, 
+        },
+      })
+
+      const { isConfirmed } = await Swal.fire({
+        title: 'Success!',
+        text: 'Account created successfully',
+        icon: 'success',
+        confirmButtonText: 'close',
+      })
+      if(isConfirmed){
+        navigateTo('/')
+      }
+
+      email.value = ''
+      password.value = ''
+
+    } catch(err) {
+      error.value = err.data?.message || err.message || 'Registration failed'
+      console.error('Registration error:', err)
+    } finally {
+      loading.value = false
+    }
+  }
+</script>
+
+
+
+
 <template>
   <div class="relative min-h-screen overflow-hidden bg-[#0B0F14]">
     <div class="absolute inset-0">
@@ -101,32 +152,3 @@
   </div>
 </template>
 
-<script setup>
-  const email = ref('')
-  const password = ref('')
-  const error = ref('')
-  const loading = ref(false)
-
-  async function submit(){
-    error.value = ''
-    loading.value = true
-    try {
-      const response = await $fetch('/api/user',{
-        method: "POST",
-        body: {
-          email: email.value,
-          password: password.value, 
-        },
-      })
-      console.log(response)
-      alert('Registration successful!')
-      email.value = ''
-      password.value = ''
-    } catch(err) {
-      error.value = err.data?.message || err.message || 'Registration failed'
-      console.error('Registration error:', err)
-    } finally {
-      loading.value = false
-    }
-  }
-</script>

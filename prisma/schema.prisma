@@ -11,4 +11,19 @@ model user {
   email    String @unique
   password String
   salt     String
+
+  // It tells the user model that it owns an array of notes.
+  notes note[]
+}
+
+model note {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // This links the note back to the user
+  userId Int
+  user   user @relation(fields: [userId], references: [id])
 }
