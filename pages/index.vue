@@ -167,9 +167,9 @@ onMounted(() => {
     </header>
 
     <div class="relative z-10 flex-1 overflow-hidden p-4 md:p-6 flex flex-col">
-      <div class="flex-1 w-full rounded-3xl border border-white/10 bg-zinc-950/40 shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl overflow-hidden flex">
-        
-        <Splitpanes class="w-full h-full custom-splitpanes">
+  <div class="flex-1 w-full rounded-3xl border border-white/10 bg-zinc-950/40 shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl overflow-hidden flex flex-col">
+    
+    <Splitpanes class="flex-1 w-full custom-splitpanes">
           
           <Pane min-size="15" size="20" max-size="30" class="border-r border-white/10">
             <Sidebar 
