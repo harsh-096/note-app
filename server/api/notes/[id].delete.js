@@ -2,7 +2,7 @@ import { getPrismaClient } from '../../utils/prisma'
 import jwt from 'jsonwebtoken'
 
 export default defineEventHandler(async (event) => {
-  // 1. Verify user
+  // 1. Verify user is logged in
   const token = getCookie(event, 'NoteApp')
   if (!token) throw createError({ statusCode: 401, message: "Unauthorized" })
 
@@ -13,12 +13,11 @@ export default defineEventHandler(async (event) => {
 
     const prisma = getPrismaClient()
 
-    // 2. Delete the note. 
-    // We use deleteMany to ensure we only delete if BOTH the note ID and User ID match, preventing hackers from deleting other people's notes!
+    // 2. Delete the note from the database safely
     const result = await prisma.note.deleteMany({
       where: { 
         id: noteId,
-        userId: userId
+        userId: userId // Crucial: prevents users from deleting someone else's note
       }
     })
 
