@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { marked } from 'marked'
-import DOMPurify from 'isomorphic-dompurify'
+import DOMPurify from 'dompurify' // Switched to standard dompurify
 
 const props = defineProps({
   rawMarkdown: String
@@ -27,7 +27,16 @@ const compiledMarkdown = computed(() => {
     }).join('')
 
     const rawHtml = marked.parse(processedText)
-    return DOMPurify.sanitize(rawHtml)
+    
+    // SAFEGUARD: Only run DOMPurify if we are in the browser
+    // This prevents the Vercel 500 Server Crash!
+    if (process.client) {
+      return DOMPurify.sanitize(rawHtml)
+    }
+    
+    // Return empty string on the server since it's wrapped in <ClientOnly> anyway
+    return ''
+    
   } catch (error) {
     console.error("Markdown parsing error:", error)
     return '<p class="text-red-400">Error loading preview.</p>'

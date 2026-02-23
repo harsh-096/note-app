@@ -8,9 +8,8 @@ defineEmits(['update:title', 'update:content'])
 </script>
 
 <template>
-  <div class="flex flex-col h-full bg-transparent">
+  <div class="flex flex-col h-full min-h-0 bg-transparent">
     <div class="px-5 py-3 border-b border-white/5 bg-black/20 shrink-0 flex items-center">
-      <!-- <span class="text-[10px] font-mono tracking-widest text-zinc-500 mr-3">File</span> -->
       <input 
         :value="title"
         @input="$emit('update:title', $event.target.value)"
@@ -18,10 +17,11 @@ defineEmits(['update:title', 'update:content'])
         placeholder="name your note"
       />
     </div>
+    
     <textarea
       :value="content"
       @input="$emit('update:content', $event.target.value)"
-      class="flex-1 w-full h-full resize-none bg-transparent p-6 text-sm text-zinc-300 outline-none leading-relaxed placeholder:text-zinc-700 font-mono focus:ring-0"
+      class="flex-1 min-h-0 w-full h-full resize-none bg-transparent p-6 text-sm text-zinc-300 outline-none leading-relaxed placeholder:text-zinc-700 font-mono focus:ring-0"
       placeholder="Start typing your markdown here..."
     ></textarea>
   </div>

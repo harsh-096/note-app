@@ -14,7 +14,7 @@ const formatDate = (dateString) => {
 </script>
 
 <template>
-  <div class="flex flex-col h-full bg-black/40">
+  <div class="flex flex-col h-full min-h-0 bg-black/40">
     <div class="p-5 border-b border-white/5 flex items-center justify-between shrink-0">
       <span class="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">Your Notes</span>
       <button @click="$emit('createNote')" class="flex h-6 w-6 items-center justify-center rounded-full bg-white/5 border border-white/10 text-purple-400 hover:bg-purple-500/20 hover:text-purple-300 transition-all">
@@ -22,7 +22,7 @@ const formatDate = (dateString) => {
       </button>
     </div>
     
-    <div class="flex-1 overflow-y-auto p-3 space-y-2">
+    <div class="flex-1 min-h-0 overflow-y-auto p-3 space-y-2">
       <div 
         v-for="note in notes" :key="note.id"
         @click="$emit('selectNote', note.id)"
